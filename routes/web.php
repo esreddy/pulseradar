@@ -18,6 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/login', [AuthManager::class, 'login'])->name('login');
+Route::get('/login', [AuthManager::class, 'login'])->name('login')->middleware('alreadyLoggedIn');
 Route::post('/login', [AuthManager::class, 'loginPost'])->name('login.post');
-Route::post('/logout', [AuthManager::class, 'logout'])->name('logout');
+Route::get('/logout', [AuthManager::class, 'logout'])->name('logout');
+Route::get('/dashboard', [AuthManager::class, 'dashboard'])->name('dashboard')->middleware('isLoggedIn');
