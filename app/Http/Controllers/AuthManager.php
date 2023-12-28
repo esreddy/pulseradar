@@ -50,6 +50,14 @@ class AuthManager extends Controller
     }
     function logout()
     {
+        //method1: logout
+        if(Session::has('loginId'))
+        {
+            Session::pull('loginId');
+            return redirect(route('login'));
+        }
+
+        //method2: logout
         Session::flush();
         Auth::logout();
         return redirect(route('login'));
