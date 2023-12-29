@@ -15,7 +15,7 @@
           <a class="nav-link" href="#"><i class="fa fa-database"></i><span>Masters</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fa fa-list-ul"></i><span>Survey List</span></a>
+          <a class="nav-link" href="view-surveys"><i class="fa fa-list-ul"></i><span>Survey List</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="view-employees"><i class="fa fa-users"></i><span>Employees</span></a>

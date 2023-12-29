@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthManager;
+use App\Http\Controllers\SurveyController;
 use App\Models\Employee;
 use Illuminate\Support\Facades\Route;
 
@@ -27,3 +28,11 @@ Route::get('/profile', [AuthManager::class, 'profile'])->name('profile')->middle
 Route::get('/change-password', [AuthManager::class, 'changePassword'])->name('change-password');
 Route::post('/change-password', [AuthManager::class, 'changePasswordPost'])->name('change.password.post');
 Route::get('/view-employees', [Employee::class, 'viewEmployees'])->name('view.employees');
+Route::get('/view-surveys', [SurveyController::class, 'viewSurveys'])->name('view.surveys');
+//Route::put('/update_status/{id}', 'SurveyController@updateStatus');
+Route::post('/update_status', [SurveyController::class, 'updateStatus'])->name('update.survey');
+
+Route::get('survey/{id}', [SurveyController::class, 'updateStatus']);
+Route::get('survey-delete/{id}', [SurveyController::class, 'updateStatus2']);
+
+
