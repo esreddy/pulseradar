@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -18,11 +19,11 @@ class AuthManager extends Controller
     {
 
         $request->validate([
-            'email' =>'required',
+            'mobileNumber' =>'required',
             'password' =>'required'
         ]);
 
-        $employee = Employee::where('email','=', $request->email)->first();
+        $employee = Employee::where('mobileNumber','=', $request->mobileNumber)->first();
         if ($employee)
         {
             if(Hash::check($request->password, $employee->password))
@@ -65,12 +66,71 @@ class AuthManager extends Controller
     function dashboard()
     {
         $data = array();
-        if(Session::has('loggedIn'))
+        if(Session::has('loginId'))
         {
-            $data = Employee::where('id','=', Session::get('loggedIn'))->first();
+            $data = Employee::where('id','=', Session::get('loginId'))->first();
         }
         return view('dashboard',compact('data'));
     }
+
+    function profile()
+    {
+        $data = array();
+        if(Session::has('loginId'))
+        {
+            $data = Employee::where('id','=', Session::get('loginId'))->first();
+        }
+        return view('profile',compact('data'));
+    }
+    function changePassword()
+    {
+        return view('/change-password');
+    }
+    function changePasswordPost(Request $request)
+    {
+        DB::enableQueryLog();
+
+        $request->validate([
+            'current_password' => 'required',
+            'password_confirmation' => 'required',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+
+        $employee = Employee::where('id','=', Session::get('loginId'))->first();
+       // dd(DB::getQueryLog());
+       // Display the executed query
+       // dd($employee->toSql());
+        if ($employee)
+        {
+            if(Hash::check($request->current_password, $employee->password))
+            {
+                $request->session()->regenerate();
+                $request->session()->put('loginId', $employee->id);
+
+                $employee->update([
+                    'password' => Hash::make($request->password),
+                ]);
+
+                //return redirect('dashboard');
+                return redirect()->back()->with('success', 'Password changed successfully.');
+
+            }else
+            {
+                //return back()->with('fail','Password not matches.');
+                return back()->with('error', 'The provided current password does not match your actual password.');
+
+            }
+        } else
+        {
+            return back()->with('fail','Username not registered.');
+        }
+
+
+
+        //return view('change-password');
+    }
+
     function addEmployee(Request $request)
     {
         $request->validate([

@@ -9,25 +9,31 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="dashboard"><i class="fa fa-home"></i><span>Dashboard</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
+          <a class="nav-link" href="#"><i class="fa fa-database"></i><span>Masters</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
+          <a class="nav-link" href="#"><i class="fa fa-list-ul"></i><span>Survey List</span></a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="view-employees"><i class="fa fa-users"></i><span>Employees</span></a>
+        </li>
+
       </ul>
       <span class="navbar-text">
       <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Link
+          <img src="https://www.tutorialrepublic.com/examples/images/avatar/3.jpg" class="avatar" alt="Avatar"> <Name> <b class="caret"></b>
           </a>
+
           <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="profile"><i class="fa fa-user-o"></i> Profile</a></li>
+            <li><a class="dropdown-item" href="change-password"><i class="fa fa-key"></i> Change Password</a></li>
+            <li><a class="dropdown-item" href="#"><i class="fa fa-sliders"></i> Settings</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="logout">Logout</a></li>
+            <li><a class="dropdown-item" href="logout"><i class="material-icons">&#xE8AC;</i>Logout</a></li>
           </ul>
         </li>
       </span>
@@ -35,3 +41,11 @@
     </div>
   </div>
 </nav>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
