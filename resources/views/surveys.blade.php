@@ -14,6 +14,7 @@
     <!-- Add other options as needed -->
 </select>
 <p>Total Records: {{ $records->total() }}</p>
+<a href="survey-add" ><button class="btn btn-success btn-sm">Add Survey</button></a>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -52,7 +53,7 @@ $statusNames = [
         </td>
         <td>{{ $record->createdDate }}</td>
         <td>
-        
+
         @if($record->status == 1)
             <a href="survey/{{ $record->id }}" ><button class="btn btn-primary btn-sm">Completed</button></a>
             <a href="edit_record/{{ $record->id }}" ><button class="btn btn-secondary btn-sm">Edit</button></a>

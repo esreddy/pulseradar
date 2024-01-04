@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\AuthManager;
-use App\Http\Controllers\SurveyController;
 use App\Models\Employee;
+use App\Http\Controllers\AuthManager;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StateController;
+use App\Http\Controllers\SurveyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,5 +35,9 @@ Route::post('/update_status', [SurveyController::class, 'updateStatus'])->name('
 
 Route::get('survey/{id}', [SurveyController::class, 'updateStatus']);
 Route::get('survey-delete/{id}', [SurveyController::class, 'updateStatus2']);
+
+Route::get('/survey-add', [SurveyController::class, 'surveyAdd'])->name('survey-add');
+Route::get('/get-constituencies/{stateId}', [StateController::class, 'getConstituencies'])->name('get.constituencies');
+
 
 
