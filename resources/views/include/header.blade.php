@@ -11,8 +11,18 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="dashboard"><i class="fa fa-home"></i><span>Dashboard</span></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fa fa-database"></i><span>Masters</span></a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fa fa-database"></i><span>Masters</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="assemblies">View Parliaments/Assemblies</a></li>
+            <li><a class="dropdown-item" href="#">View Municipalities/Wards</a></li>
+            <li><a class="dropdown-item" href="#">Add Parliament</a></li>
+            <li><a class="dropdown-item" href="/assemblies/create">Add Assembly</a></li>
+            <li><a class="dropdown-item" href="/states">View States</a></li>
+            <li><a class="dropdown-item" href="/states/create">Add State</a></li>
+          </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="view-surveys"><i class="fa fa-list-ul"></i><span>Survey List</span></a>

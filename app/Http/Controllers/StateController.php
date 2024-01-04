@@ -9,6 +9,30 @@ use Illuminate\Http\Request;
 
 class StateController extends Controller
 {
+    public function index()
+    {
+        $states = State::all();
+        return view('states.index', compact('states'));
+    }
+
+    public function create()
+    {
+        return view('states.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|unique:states|max:255',
+        ]);
+
+        State::create($request->all());
+        return redirect()->route('states.index')->with('success', 'State created successfully');
+    }
+
+    // Implement other CRUD operations accordingly
+
+
     public function showStates()
     {
         $states = State::all();

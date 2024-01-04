@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthManager;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StateController;
 use App\Http\Controllers\SurveyController;
+use App\Http\Controllers\AssemblyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,5 +40,34 @@ Route::get('survey-delete/{id}', [SurveyController::class, 'updateStatus2']);
 Route::get('/survey-add', [SurveyController::class, 'surveyAdd'])->name('survey-add');
 Route::get('/get-constituencies/{stateId}', [StateController::class, 'getConstituencies'])->name('get.constituencies');
 
+
+
+
+// Route to display the list of states
+Route::get('/states', [StateController::class, 'index'])->name('states.index');
+
+// Route to display the form for creating a new state
+Route::get('/states/create', [StateController::class, 'create'])->name('states.create');
+
+// Route to store a new state
+Route::post('/states', [StateController::class, 'store'])->name('states.store');
+
+// Route to display the form for editing a state
+Route::get('/states/{state}/edit', [StateController::class, 'edit'])->name('states.edit');
+
+// Route to update a state
+Route::put('/states/{state}', [StateController::class, 'update'])->name('states.update');
+
+// Route to delete a state
+Route::delete('/states/{state}', [StateController::class, 'destroy'])->name('states.destroy');
+
+
+// Routes for assemblies
+Route::get('/assemblies', [AssemblyController::class, 'index'])->name('assemblies.index');
+Route::get('/assemblies/create', [AssemblyController::class, 'create'])->name('assemblies.create');
+Route::post('/assemblies', [AssemblyController::class, 'store'])->name('assemblies.store');
+Route::get('/assemblies/{assembly}/edit', [AssemblyController::class, 'edit'])->name('assemblies.edit');
+Route::put('/assemblies/{assembly}', [AssemblyController::class, 'update'])->name('assemblies.update');
+Route::delete('/assemblies/{assembly}', [AssemblyController::class, 'destroy'])->name('assemblies.destroy');
 
 

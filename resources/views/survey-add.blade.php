@@ -164,15 +164,16 @@
         <div class="tab-pane fade" id="tab5">
             <!-- Content for Config tab -->
             <p>Config tab content goes here...</p>
-            
+
         </div>
     </div>
 </div>
 
-
+@include('modals.general_question_modal')
 <!-- Include your custom JavaScript file
 <link href="{{ asset('assets/js/sc.js') }}" > -->
 <script src="{{ asset('assets/js/sc.js') }}"></script>
+<script src="{{ asset('assets/js/survey.js') }}"></script>
 @endsection
 
 
