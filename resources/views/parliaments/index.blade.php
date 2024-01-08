@@ -2,12 +2,71 @@
 @extends('layout')
 @section('title','List of Parliaments')
 @section('content')
+<script>
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $(document).off("click", ".edit_assembly").on("click", ".edit_assembly", function() {
+
+        if ($(this).closest(".assembly-name").attr("key") != "") {
+            var assemblyId = $(this).closest(".assembly-icons").attr("key");
+            $.ajax({
+                type: "POST",
+                url: "{{ route('getAssemblyInfo') }}",
+                data: { "assemblyId": assemblyId },
+                dataType: 'json',
+                success: function(data) {
+                    $('#addAssemblyModal').find(".modal-header").find("h5").text("Edit Assembly");
+                    $("#assemblyId").val(data.id);
+                    $("#assemblyName").val(data.name);
+                    $('#addAssemblyModal').modal('show');
+                    //alert("Assembly");
+                },
+                error: function(xhr, status, error) {
+                    // Handle error
+                    console.error('Error fetching assembly data:', error);
+
+                }
+            });
+        }
+    });
+
+    $(document).off("click", "#saveAssemblyChanges").on("click", "#saveAssemblyChanges", function() {
+    var assemblyId = $("#assemblyId").val();
+    var assemblyName = $("#assemblyName").val();
+    $.ajax({
+        type: "POST",
+        url: "{{ route('updateAssemblyInfo') }}",
+        data: {
+            "assemblyId": assemblyId,
+            "assemblyName": assemblyName,
+            "_token": "{{ csrf_token() }}"
+        },
+        dataType: 'json',
+        success: function(response) {
+            $('#addAssemblyModal').modal('hide'); // Hide the modal
+            // Display success message (you can customize this)
+            alert(response.message); // Display the success message
+            location.reload(); // Reload the page
+        },
+        error: function(xhr, status, error) {
+            // Handle error if necessary
+            console.error(xhr.responseText);
+        }
+    });
+});
+
+</script>
+
 
 <!-- Add Assembly Modal -->
 <div class="modal" id="addAssemblyModal" tabindex="-1" role="dialog" aria-labelledby="addAssemblyModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action="{{ route('assemblies.store') }}" method="POST">
+            <form id="updateAssemblyForm" action="{{ route('updateAssemblyInfo') }}" method="POST">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title" id="addAssemblyModalLabel">Add Assembly</h5>
@@ -15,15 +74,18 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+
                 <div class="modal-body">
                     <div class="form-group">
+                        <input type="hidden" name="assemblyId" id="assemblyId"/>
                         <label for="assemblyName">Assembly Name:</label>
                         <input type="text" class="form-control" id="assemblyName" name="assemblyName" required>
                     </div>
                 </div>
+
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add Assembly</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" name="saveAssemblyChanges" id="saveAssemblyChanges">Save changes</button>
                 </div>
             </form>
         </div>
@@ -143,9 +205,10 @@
                             @foreach ($parliament->assemblies as $assembly)
                                 <div class="assembly-box">
                                     <div class="assembly-content">
-                                        <div class="assembly-name">{{ $assembly->name }}</div>
-                                        <div class="assembly-icons">
+                                        <div class="assembly-name" >{{ $assembly->name }}</div>
+                                        <div class="assembly-icons" key="{{ $assembly->id }}">
                                             <a href="{{ route('assemblies.edit', $assembly->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                            <span class="edit_assembly"><i class="fa fa-pencil" aria-hidden="true"></i></span>
                                             <span class="del_parlia_assem" key="a" del="{{ $assembly->id }}"><i class="fa fa-trash-o delete-assembly" aria-hidden="true"></i></span>
                                             <span title="Mandals" class="madals_list"><i class="fa fa-list" aria-hidden="true"></i></span>
                                         </div>
@@ -153,13 +216,17 @@
                                 </div>
                             @endforeach
                         @endif
-
-                        <!-- Add Assembly Icon -->
+                        <a href="#" class="edit-link" data-bs-toggle="modal" data-bs-target="#addAssemblyModal" data-assembly-id="1" data-assembly-name="Assembly 1">
+                            Edit Assembly
+                        </a>
+                        <!-- Anchor tag to trigger the modal -->
                         <div class="add-assembly-icon">
-                            <a href="{{ route('assemblies.create') }}"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#addAssemblyModal">
+                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                            </a>
                         </div>
 
-                        
+
                         <!-- End of Add Assembly Icon -->
 
                     </div>
@@ -200,6 +267,7 @@
         });
     });
 </script>
+
 @endsection
 
 @section('scripts')
@@ -211,4 +279,12 @@
         });
     });
 </script>
+
+
+
+
+
+
 @endsection
+
+

@@ -71,6 +71,9 @@ Route::get('/assemblies/{assembly}/edit', [AssemblyController::class, 'edit'])->
 Route::put('/assemblies/{assembly}', [AssemblyController::class, 'update'])->name('assemblies.update');
 Route::delete('/assemblies/{assembly}', [AssemblyController::class, 'destroy'])->name('assemblies.destroy');
 
+Route::post('/getAssemblyInfo', [AssemblyController::class,'getAssemblyInfo' ])->name('getAssemblyInfo');
+Route::post('/updateAssemblyInfo', [AssemblyController::class,'updateAssemblyInfo' ])->name('updateAssemblyInfo');
+
 // Routes for parliaments
 Route::get('/parliaments', [ParliamentController::class, 'index'])->name('parliaments.index');
 Route::get('/parliaments/create', [ParliamentController::class, 'create'])->name('parliaments.create');
@@ -78,4 +81,5 @@ Route::post('/parliaments', [ParliamentController::class, 'store'])->name('parli
 Route::get('/parliaments/{parliament}/edit', [ParliamentController::class, 'edit'])->name('parliaments.edit');
 Route::put('/parliaments/{parliament}', [ParliamentController::class, 'update'])->name('parliaments.update');
 Route::delete('/parliaments/{parliament}', [ParliamentController::class, 'destroy'])->name('parliaments.destroy');
+
 

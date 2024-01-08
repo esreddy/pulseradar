@@ -19,7 +19,7 @@ class AssemblyController extends Controller
         $states = State::all();
         return view('assemblies.create', compact('states'));
     }
-    
+
 
     public function store(Request $request)
     {
@@ -56,5 +56,28 @@ class AssemblyController extends Controller
         $assembly->delete();
 
         return redirect()->route('assemblies.index')->with('success', 'Assembly deleted successfully');
+    }
+
+
+    public function getAssemblyInfo(Request $request)
+    {
+        $assemblyId = $request->input('assemblyId');
+
+        // Fetch assembly information based on ID
+        $assembly = Assembly::find($assemblyId);
+
+        return response()->json($assembly);
+    }
+    public function updateAssemblyInfo(Request $request)
+    {
+        $assemblyId=$request->assemblyId;
+        $assembly = Assembly::findOrFail($assemblyId);
+        $assembly->name = $request->input('assemblyName');
+        $assembly->update();
+        //return response()->json($assembly);
+
+        $successMessage = ['message' => 'Assembly information updated successfully'];
+
+        return response()->json($successMessage);
     }
 }
