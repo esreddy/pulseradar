@@ -16,7 +16,7 @@
           <i class="fa fa-database"></i><span>Masters</span>
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="assemblies">View Parliaments/Assemblies</a></li>
+            <li><a class="dropdown-item" href="parliaments">View Parliaments/Assemblies</a></li>
             <li><a class="dropdown-item" href="#">View Municipalities/Wards</a></li>
             <li><a class="dropdown-item" href="#">Add Parliament</a></li>
             <li><a class="dropdown-item" href="/assemblies/create">Add Assembly</a></li>

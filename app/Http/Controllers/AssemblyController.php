@@ -19,6 +19,7 @@ class AssemblyController extends Controller
         $states = State::all();
         return view('assemblies.create', compact('states'));
     }
+    
 
     public function store(Request $request)
     {

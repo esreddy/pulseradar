@@ -18,6 +18,10 @@ class Assembly extends Model
     {
         return $this->belongsTo(State::class, 'stateId', 'id');
     }
+    public function parliament()
+    {
+        return $this->belongsTo(Parliament::class, 'parliamentId', 'id');
+    }
 
    // $assembly = Assembly::find($assemblyId);
     //$stateOfAssembly = $assembly->state; // Access the associated State model

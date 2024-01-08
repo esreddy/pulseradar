@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StateController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\AssemblyController;
+use App\Http\Controllers\ParliamentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,4 +71,11 @@ Route::get('/assemblies/{assembly}/edit', [AssemblyController::class, 'edit'])->
 Route::put('/assemblies/{assembly}', [AssemblyController::class, 'update'])->name('assemblies.update');
 Route::delete('/assemblies/{assembly}', [AssemblyController::class, 'destroy'])->name('assemblies.destroy');
 
+// Routes for parliaments
+Route::get('/parliaments', [ParliamentController::class, 'index'])->name('parliaments.index');
+Route::get('/parliaments/create', [ParliamentController::class, 'create'])->name('parliaments.create');
+Route::post('/parliaments', [ParliamentController::class, 'store'])->name('parliaments.store');
+Route::get('/parliaments/{parliament}/edit', [ParliamentController::class, 'edit'])->name('parliaments.edit');
+Route::put('/parliaments/{parliament}', [ParliamentController::class, 'update'])->name('parliaments.update');
+Route::delete('/parliaments/{parliament}', [ParliamentController::class, 'destroy'])->name('parliaments.destroy');
 

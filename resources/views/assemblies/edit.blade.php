@@ -14,7 +14,7 @@
             <label for="state_id">State:</label>
             <select name="state_id" id="state_id">
                 @foreach($states as $state)
-                    <option value="{{ $state->id }}" @if($state->id === $assembly->state_id) selected @endif>{{ $state->name }}</option>
+                    <option value="{{ $state->id }}" @if($state->id === $assembly->stateId) selected @endif>{{ $state->name }}</option>
                 @endforeach
             </select>
         </div>
